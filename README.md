@@ -33,7 +33,7 @@ Set Dialog Title, Description, Buttons altogether:
                 @Override
                 public void onPositiveButtonClickListener(AlertDialog dialog) {
                     Toast.makeText(context, "Positive Button Clicked", Toast.LENGTH_SHORT).show();
-                                
+                              
                     dialog.dismiss();
                 }
             })
