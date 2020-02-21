@@ -19,3 +19,7 @@ Step 2. Add the dependency
 	        implementation 'com.github.RazM10:JackDialog-Android:0.0.1'
 	}
 
+
+Initialization
+
+	JackDialog jackDialog = new JackDialog(context);
