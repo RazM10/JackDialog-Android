@@ -29,14 +29,13 @@ Set Dialog Title, Description, Buttons altogether:
 	jackDialog
             .setTitle("Delete")
             .setDescription("Want to Delete?")
-            .setPositiveButton("Delete", new PositiveButtonListener() {
-                @Override
-                public void onPositiveButtonClickListener(AlertDialog dialog) {
-                    Toast.makeText(context, "Positive Button Clicked", Toast.LENGTH_SHORT).show();
-                              
-                    dialog.dismiss();
-                }
-            })
+            .setPositiveButton("Delete", new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     Toast.makeText(context, "Positive Button Clicked", Toast.LENGTH_SHORT).show();
+                     jackDialog.dismiss();
+                 }
+             })
             .setNegativeButton("Cancel")
             .show();
 
