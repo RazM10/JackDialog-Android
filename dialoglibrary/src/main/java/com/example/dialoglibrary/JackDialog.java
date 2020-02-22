@@ -169,9 +169,9 @@ public class JackDialog {
     }
 
     private void colorTryCatch(int color, TextView tv) {
-        try {
+        if (color > 0) {
             tv.setTextColor(context.getResources().getColor(color));
-        } catch (Resources.NotFoundException e) {
+        } else {
             tv.setTextColor(color);
         }
     }
