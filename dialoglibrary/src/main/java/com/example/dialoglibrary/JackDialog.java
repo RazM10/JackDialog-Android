@@ -13,15 +13,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 public class JackDialog {
-    View viewCustom;
-    Context context;
-    AlertDialog.Builder dialog;
-    TextView textView_okBtn, textView_cancelBtn, textView_title, textView_description;
+    private Context context;
 
-    private PositiveButtonListener positiveButtonListener;
-    private NegativeButtonListener negativeButtonListener;
+    private View viewCustom;
+    private TextView textView_okBtn, textView_cancelBtn, textView_title, textView_description;
 
-    AlertDialog alertDialog;
+    private AlertDialog.Builder dialog;
+    private AlertDialog alertDialog;
 
     public JackDialog(Context context) {
         this.context = context;
@@ -35,33 +33,23 @@ public class JackDialog {
                 .setView(viewCustom);
     }
 
-    public JackDialog setTitle() {
-        textView_title.setVisibility(View.VISIBLE);
-        return this;
-    }
-
     public JackDialog setTitle(String title) {
         textView_title.setVisibility(View.VISIBLE);
         textView_title.setText(title);
         return this;
     }
 
-    public JackDialog setTitle(String title,String color) {
+    public JackDialog setTitle(String title, String color) {
         textView_title.setVisibility(View.VISIBLE);
         textView_title.setTextColor(Color.parseColor(color));
         textView_title.setText(title);
         return this;
     }
 
-    public JackDialog setTitle(String title,int color) {
+    public JackDialog setTitle(String title, int color) {
         textView_title.setVisibility(View.VISIBLE);
-        colorTryCatch(color,textView_title);
+        colorTryCatch(color, textView_title);
         textView_title.setText(title);
-        return this;
-    }
-
-    public JackDialog setDescription() {
-        textView_description.setVisibility(View.VISIBLE);
         return this;
     }
 
@@ -71,23 +59,17 @@ public class JackDialog {
         return this;
     }
 
-    public JackDialog setDescription(String text,String color) {
+    public JackDialog setDescription(String text, String color) {
         textView_description.setVisibility(View.VISIBLE);
         textView_description.setTextColor(Color.parseColor(color));
         textView_description.setText(text);
         return this;
     }
 
-    public JackDialog setDescription(String text,int color) {
+    public JackDialog setDescription(String text, int color) {
         textView_description.setVisibility(View.VISIBLE);
-        colorTryCatch(color,textView_description);
+        colorTryCatch(color, textView_description);
         textView_description.setText(text);
-        return this;
-    }
-
-    public JackDialog setPositiveButton() {
-        textView_okBtn.setVisibility(View.VISIBLE);
-
         return this;
     }
 
@@ -109,52 +91,35 @@ public class JackDialog {
         return this;
     }
 
-    public JackDialog setPositiveButton(String text, PositiveButtonListener listener) {
+    public JackDialog setPositiveButton(String text, View.OnClickListener listener) {
         textView_okBtn.setText(text);
         textView_okBtn.setVisibility(View.VISIBLE);
 
-        positiveButtonClicked(listener);
+        textView_okBtn.setOnClickListener(listener);
 
         return this;
     }
 
-    public JackDialog setPositiveButton(String text, String color, PositiveButtonListener listener) {
+    public JackDialog setPositiveButton(String text, String color, View.OnClickListener listener) {
         textView_okBtn.setText(text);
         textView_okBtn.setTextColor(Color.parseColor(color));
         textView_okBtn.setVisibility(View.VISIBLE);
 
-        positiveButtonClicked(listener);
+        textView_okBtn.setOnClickListener(listener);
 
         return this;
     }
 
-    public JackDialog setPositiveButton(String text, int color, PositiveButtonListener listener) {
+    public JackDialog setPositiveButton(String text, int color, View.OnClickListener listener) {
         textView_okBtn.setText(text);
-        colorTryCatch(color,textView_okBtn);
+        colorTryCatch(color, textView_okBtn);
         textView_okBtn.setVisibility(View.VISIBLE);
 
-        positiveButtonClicked(listener);
+        textView_okBtn.setOnClickListener(listener);
 
         return this;
     }
 
-
-    private void positiveButtonClicked(PositiveButtonListener listener) {
-        positiveButtonListener = listener;
-
-        textView_okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeParentView();
-                positiveButtonListener.onPositiveButtonClickListener(alertDialog);
-            }
-        });
-    }
-
-    public JackDialog setNegativeButton() {
-        textView_cancelBtn.setVisibility(View.VISIBLE);
-        return this;
-    }
 
     public JackDialog setNegativeButton(String text) {
         textView_cancelBtn.setText(text);
@@ -174,51 +139,37 @@ public class JackDialog {
         return this;
     }
 
-    public JackDialog setNegativeButton(String text, NegativeButtonListener listener) {
+    public JackDialog setNegativeButton(String text, View.OnClickListener listener) {
         textView_cancelBtn.setText(text);
         textView_cancelBtn.setVisibility(View.VISIBLE);
 
-        negativeButtonClicked(listener);
+        textView_cancelBtn.setOnClickListener(listener);
 
         return this;
     }
 
-    public JackDialog setNegativeButton(String text, String color, NegativeButtonListener listener) {
+    public JackDialog setNegativeButton(String text, String color, View.OnClickListener listener) {
         textView_cancelBtn.setText(text);
         textView_cancelBtn.setTextColor(Color.parseColor(color));
         textView_cancelBtn.setVisibility(View.VISIBLE);
 
-        negativeButtonClicked(listener);
+        textView_cancelBtn.setOnClickListener(listener);
 
         return this;
     }
 
-    public JackDialog setNegativeButton(String text, int color, NegativeButtonListener listener) {
+    public JackDialog setNegativeButton(String text, int color, View.OnClickListener listener) {
         textView_cancelBtn.setText(text);
-        colorTryCatch(color,textView_cancelBtn);
+        colorTryCatch(color, textView_cancelBtn);
         textView_cancelBtn.setVisibility(View.VISIBLE);
 
-        negativeButtonClicked(listener);
+        textView_cancelBtn.setOnClickListener(listener);
 
         return this;
     }
 
-    private void negativeButtonClicked(NegativeButtonListener listener) {
-        negativeButtonListener = listener;
-
-        textView_cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (viewCustom.getParent() != null) {
-                    ((ViewGroup) viewCustom.getParent()).removeView(viewCustom); // <- fix
-                }
-                negativeButtonListener.onNegativeButtonClickListener(alertDialog);
-            }
-        });
-    }
-
-    private void colorTryCatch(int color,TextView tv){
-        try{
+    private void colorTryCatch(int color, TextView tv) {
+        try {
             tv.setTextColor(context.getResources().getColor(color));
         } catch (Resources.NotFoundException e) {
             tv.setTextColor(color);
@@ -226,7 +177,6 @@ public class JackDialog {
     }
 
     public void show() {
-//        dialog.setCancelable(false);
         removeParentView();
         alertDialog = dialog.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -242,5 +192,9 @@ public class JackDialog {
         if (viewCustom.getParent() != null) {
             ((ViewGroup) viewCustom.getParent()).removeView(viewCustom); // <- fix
         }
+    }
+
+    public void dismiss() {
+        alertDialog.dismiss();
     }
 }

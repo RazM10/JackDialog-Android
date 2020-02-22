@@ -1,6 +1,5 @@
 package com.example.jackdialoglibrary;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -9,8 +8,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dialoglibrary.JackDialog;
-import com.example.dialoglibrary.NegativeButtonListener;
-import com.example.dialoglibrary.PositiveButtonListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,21 +23,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDialog(View view) {
         jackDialog
-                .setCancelable(false)
-                .setTitle("Hello",Color.BLUE)
-                .setDescription("HELLO WORLD","#212121")
-                .setPositiveButton("Save", R.color.colorPrimary, new PositiveButtonListener() {
+                .setCancelable(true)
+                .setTitle("Hello", Color.BLUE)
+                .setDescription("HELLO WORLD", "#212121")
+                .setPositiveButton("Save", R.color.colorPrimary, new View.OnClickListener() {
                     @Override
-                    public void onPositiveButtonClickListener(AlertDialog dialog) {
+                    public void onClick(View v) {
                         Toast.makeText(MainActivity.this, "Custom Positive Listener", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                        jackDialog.dismiss();
                     }
                 })
-                .setNegativeButton("Cancel", "#ff0000", new NegativeButtonListener() {
+                .setNegativeButton("Cancel", "#ff0000", new View.OnClickListener() {
                     @Override
-                    public void onNegativeButtonClickListener(AlertDialog dialog) {
+                    public void onClick(View v) {
                         Toast.makeText(MainActivity.this, "Custom Negative Listener", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                        jackDialog.dismiss();
                     }
                 })
                 .show();
